@@ -23,7 +23,7 @@ npm run dev
 
 ### 인코딩 종류
 
-- ASCII, UTF-8, UTF-16, EUC-KR
+- ASCII, EUC-KR, UTF-8, UTF-16
 
 ##### ASCII
 
@@ -32,6 +32,8 @@ npm run dev
 - 7bit 문자 인코딩(!8bit)
 
 - 128개의 문자를 표현
+
+- 나머지 1bit는? (Parity Bit)
 
 - carriage return?, line feed ?
 
@@ -69,7 +71,7 @@ npm run dev
 
 > **UTF-16**(16-bit Unicode Transformation Format)은 유니코드 문자 인코딩 방식의 하나이다. 주로 사용되는 [기본 다국어 평면](https://ko.wikipedia.org/wiki/%EA%B8%B0%EB%B3%B8_%EB%8B%A4%EA%B5%AD%EC%96%B4_%ED%8F%89%EB%A9%B4) (BMP, Basic multilingual plane)에 속하는 문자들은 그대로 16비트 값으로 인코딩이 되고 그 이상의 문자는 특별히 정해진 방식으로 32비트로 인코딩이 된다.
 
-- 하나의 문자를 나타내기 위해 2 or 4 byte 를 이용한다.
+- 하나의 문자를 나타내기 위해 2 ~ 4 byte 를 이용한다.
 
 
 
@@ -86,14 +88,14 @@ npm run dev
 *문자열 길이를 어떻게 계산하나?*
 
 - 예전엔 문자열 길이가 byte 길이의 -1이다.(null 문자 때문에)
-- Windows Unicode에서는  length(string) / sizeof(byte) 로 처리했음..ㅠ.ㅠ
+- Windows Unicode에서는  ( length(string) / sizeof(TCHAR) ) - sizeof(TCHAR) 로 처리했음..ㅠ.ㅠ
 - 지금은??????? 
 
 
 
 ### BOM
 
-> **바이트 순서 표시**(Byte Order Mark, **BOM**)는 [유니코드](https://ko.wikipedia.org/wiki/%EC%9C%A0%EB%8B%88%EC%BD%94%EB%93%9C) 문자
+> **바이트 순서 표시**(Byte Order Mark, **BOM**) 텍스트를 소비하는 프로그램에게 텍스트 정보를 알려준다.
 
 - 텍스트 스트림이 저장되는 바이트 순서 또는 [엔디언](https://ko.wikipedia.org/wiki/%EC%97%94%EB%94%94%EC%96%B8)
 - 텍스트 스트림이 유니코드라는 사실(높은 수준의 신뢰를 위함)
@@ -101,7 +103,7 @@ npm run dev
 
 ##### 인코딩별 BOM
 
-- UTF-8: `0xEF, 0xBB, 0xBF`
+- UTF-8: `0xEF0xBB0xBF`
 - UTF-16: `U+FEFF`
 - UTF-32: UTF-16과 동일
 
